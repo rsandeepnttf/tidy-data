@@ -1,7 +1,139 @@
-Title: Code Book for Getting-and-Cleaning-Data-Course-Project Author: Sandeep
+This code book:
 
-Project Description The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis. We should submit a tidy data set and The Github repo containing the required scripts. You should also create a R script called run_analysis.R that does the following. Merges the training and the test sets to create one data set. Extracts only the measurements on the mean and standard deviation for each measurement. Uses descriptive activity names to name the activities in the data set and appropriately labels the data set with descriptive variable names. Notes on the original data
+Provides and overview of the final Course Project for "Getting and Cleaning Data".
+Summarizes the resulting data fields in "tidy_data.txt".
+Overview
 
-Here are the data for the project: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+Source Data
 
-Description of the variables x_test, y_test, subject_train, subject_test, features, activity_labels contain the data from the downloaded files. Here is the activity number and type of activity we have in the data V1 V2 1 WALKING 2 WALKING_UPSTAIRS 3 WALKING_DOWNSTAIRS 4 SITTING 5 STANDING 6 LAYING dataTrain, dataTest, data_test_train for Merging the data t tables test and training allsubject combine the subject_test, subject_train mean_and_std for defining mean and standard deviation:
+A full description of the data used in this project is here The UCI Machine Learning Repository
+
+The source data for this project is here.
+
+Script Analysis
+
+The R script, run_analysis.R does the following:
+
+Downloads required files if they do not exist.
+Merges the training and the test sets to create one data set.
+Extracts only the measurements on the mean and standard deviation for each measurement.
+Uses descriptive activity names to name the activities in the data set.
+Appropriately labels the data set with descriptive variable names.
+From the data set in step 5, I create a second, independent tidy data set entitled "tidy_data.txt", with the average of each variable for each activity and each subject.
+Summary
+
+x_train, x_test, y_train, y_test, subject_train and subject_test contain all the train, test, and subject data from the downloaded file.
+merged the x_train and x_test data into x_df.
+merged the y_train and y_test data into y_df.
+merged the subject_train and subject_test data into subject_df.
+activity_labels contain the correct names for the y_df data.frame.
+features contain the correct names for the x_df data.frame.
+required_features contain a subset of filtered features of type 'means' and 'std'.
+tidy up column names of features.
+Replaced "-mean" with "Mean".
+Replaced "-std" with "STD".
+Replaced "[-()]" with "".
+Replaced prefix "^t" with "Time".
+Replaced prefix "^f with "Frequency"
+Replaced "Acc" with "Accelerometer".
+Replaced "Gyro" with "Gyroscope".
+Replaced "Mag" with "Magnitude".
+Replaced "BodyBody" with "Body".
+corrected columns names for x_df, y_df, and subject_df.
+full_data_metrics contains merged by column values of subject_df, y_df, and x_df.
+created tidy_data data.frame using ddply of full_data_metrics, by SubjectID and Activity, executing an inline function for colMeans against columns 3 through 68. This approach provides the means of the unique columns, by SubjectID, by Activity.
+sorted tidy_data by SubjectID and Activity.
+Last step. Generate tidy_data.txt from the tidy_data data.frame
+Identifiers
+
+"SubjectID" - The ID of the test subject.
+"Activity" - The type of activity performed when the measurement was obtained.
+Measurements
+
+"TimeBodyAccelerometerMeanX"
+"TimeBodyAccelerometerMeanY"
+"TimeBodyAccelerometerMeanZ"
+"TimeBodyAccelerometerStdX"
+"TimeBodyAccelerometerStdY"
+"TimeBodyAccelerometerStdZ"
+"TimeGravityAccelerometerMeanX"
+"TimeGravityAccelerometerMeanY"
+"TimeGravityAccelerometerMeanZ"
+"TimeGravityAccelerometerStdX"
+"TimeGravityAccelerometerStdY"
+"TimeGravityAccelerometerStdZ"
+"TimeBodyAccelerometerJerkMeanX"
+"TimeBodyAccelerometerJerkMeanY"
+"TimeBodyAccelerometerJerkMeanZ"
+"TimeBodyAccelerometerJerkStdX"
+"TimeBodyAccelerometerJerkStdY"
+"TimeBodyAccelerometerJerkStdZ"
+"TimeBodyGyroscopeMeanX"
+"TimeBodyGyroscopeMeanY"
+"TimeBodyGyroscopeMeanZ"
+"TimeBodyGyroscopeStdX"
+"TimeBodyGyroscopeStdY"
+"TimeBodyGyroscopeStdZ"
+"TimeBodyGyroscopeJerkMeanX"
+"TimeBodyGyroscopeJerkMeanY"
+"TimeBodyGyroscopeJerkMeanZ"
+"TimeBodyGyroscopeJerkStdX"
+"TimeBodyGyroscopeJerkStdY"
+"TimeBodyGyroscopeJerkStdZ"
+"TimeBodyAccelerometerMagnitudeMean"
+"TimeBodyAccelerometerMagnitudeStd"
+"TimeGravityAccelerometerMagnitudeMean"
+"TimeGravityAccelerometerMagnitudeStd"
+"TimeBodyAccelerometerJerkMagnitudeMean"
+"TimeBodyAccelerometerJerkMagnitudeStd"
+"TimeBodyGyroscopeMagnitudeMean"
+"TimeBodyGyroscopeMagnitudeStd"
+"TimeBodyGyroscopeJerkMagnitudeMean"
+"TimeBodyGyroscopeJerkMagnitudeStd"
+"FrequencyBodyAccelerometerMeanX"
+"FrequencyBodyAccelerometerMeanY"
+"FrequencyBodyAccelerometerMeanZ"
+"FrequencyBodyAccelerometerStdX"
+"FrequencyBodyAccelerometerStdY"
+"FrequencyBodyAccelerometerStdZ"
+"FrequencyBodyAccelerometerMeanFreqX"
+"FrequencyBodyAccelerometerMeanFreqY"
+"FrequencyBodyAccelerometerMeanFreqZ"
+"FrequencyBodyAccelerometerJerkMeanX"
+"FrequencyBodyAccelerometerJerkMeanY"
+"FrequencyBodyAccelerometerJerkMeanZ"
+"FrequencyBodyAccelerometerJerkStdX"
+"FrequencyBodyAccelerometerJerkStdY"
+"FrequencyBodyAccelerometerJerkStdZ"
+"FrequencyBodyAccelerometerJerkMeanFreqX"
+"FrequencyBodyAccelerometerJerkMeanFreqY"
+"FrequencyBodyAccelerometerJerkMeanFreqZ"
+"FrequencyBodyGyroscopeMeanX"
+"FrequencyBodyGyroscopeMeanY"
+"FrequencyBodyGyroscopeMeanZ"
+"FrequencyBodyGyroscopeStdX"
+"FrequencyBodyGyroscopeStdY"
+"FrequencyBodyGyroscopeStdZ"
+"FrequencyBodyGyroscopeMeanFreqX"
+"FrequencyBodyGyroscopeMeanFreqY"
+"FrequencyBodyGyroscopeMeanFreqZ"
+"FrequencyBodyAccelerometerMagnitudeMean"
+"FrequencyBodyAccelerometerMagnitudeStd"
+"FrequencyBodyAccelerometerMagnitudeMeanFreq"
+"FrequencyBodyAccelerometerJerkMagnitudeMean"
+"FrequencyBodyAccelerometerJerkMagnitudeStd"
+"FrequencyBodyAccelerometerJerkMagnitudeMeanFreq"
+"FrequencyBodyGyroscopeMagnitudeMean"
+"FrequencyBodyGyroscopeMagnitudeStd"
+"FrequencyBodyGyroscopeMagnitudeMeanFreq"
+"FrequencyBodyGyroscopeJerkMagnitudeMean"
+"FrequencyBodyGyroscopeJerkMagnitudeStd"
+"FrequencyBodyGyroscopeJerkMagnitudeMeanFreq"
+Activity Labels
+
+"WALKING" (Value = "1"): The Subject was walking during the test.
+"WALKING_UPSTAIRS" (Value = "2"): The Subject was walking up a staircase during the test.
+"WALKING_DOWNSTAIRS" (Value = "3"): The Subject was walking down a staircase during the test.
+"SITTING" (Value = "4"): The Subject was sitting during the test.
+"STANDING" (Value = "5"): The Subject was standing during the test.
+"LAYING" (Value = "6"): Ths Subject was laying down during the test.
